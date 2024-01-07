@@ -4,7 +4,7 @@ import re, os, sys, time, tempfile, shutil
 import argparse
 from datetime import date
 
-compiler_path = "../node_modules/google-closure-compiler/compiler.jar"
+compiler_path = "../node_modules/google-closure-compiler-javaj/compiler.jar"
 root_path = "./"
 
 #arguments
@@ -42,7 +42,7 @@ sys.stderr.write(" + Root folder: " + root_path + "\n")
 
 def packJSCode(files):
     f1, fullcode_path = tempfile.mkstemp() #create temporary file
-    data = "//packer version\n\n"
+    data = b"//packer version\n\n"
 
     for filename in files:
         filename = filename.strip()
@@ -53,7 +53,7 @@ def packJSCode(files):
         if os.path.exists(src_file) == False:
             sys.stderr.write('\033[91m'+"JS File not found"+'\033[0m\n')
             continue
-        data += open(src_file).read() + "\n"
+        data += open(src_file,"rb").read() + b"\n"
         if check_files_individually:
               os.system("java -jar %s --js %s --js_output_file %s" % (compiler_path, src_file, "temp.js") )
         sys.stderr.write('\033[92m' + "OK\n" + '\033[0m')
@@ -67,7 +67,7 @@ def packJSCode(files):
     return fullcode_path
 
 def compileAndMinify(input_path, output_path):
-    print " + Compiling and minifying..."
+    print (" + Compiling and minifying...")
     if output_path != None:
         os.system("java -jar %s --js %s --js_output_file %s" % (compiler_path, input_path, output_path) )
         sys.stderr.write(" * Stored in " + output_path + "\n");
