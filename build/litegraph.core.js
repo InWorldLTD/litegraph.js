@@ -32,8 +32,10 @@
         NODE_SELECTED_TITLE_COLOR: "#FFF",
         NODE_TEXT_FONT: "Arial",
         NODE_TEXT_SIZE: 14,
+        NODE_TEXT_WEIGHT: "normal",
         NODE_TEXT_COLOR: "#AAA",
         NODE_SUBTEXT_SIZE: 12,
+        NODE_SUBTEXT_WEIGHT: "normal",
         NODE_DEFAULT_COLOR: "#333",
         NODE_DEFAULT_BGCOLOR: "#353535",
         NODE_DEFAULT_BOXCOLOR: "#666",
@@ -5242,9 +5244,9 @@ LGraphNode.prototype.executeAction = function(action)
         this.ds = new DragAndScale();
         this.zoom_modify_alpha = true; //otherwise it generates ugly patterns when scaling down too much
 
-        this.title_text_font = "" + LiteGraph.NODE_TEXT_SIZE + "px " + LiteGraph.NODE_TEXT_FONT;
+        this.title_text_font = LiteGraph.NODE_TEXT_WEIGHT + " " + LiteGraph.NODE_TEXT_SIZE + "px " + LiteGraph.NODE_TEXT_FONT;
         this.inner_text_font =
-            "normal " + LiteGraph.NODE_SUBTEXT_SIZE + "px " + LiteGraph.NODE_TEXT_FONT;
+            LiteGraph.NODE_SUBTEXT_WEIGHT + " " + LiteGraph.NODE_SUBTEXT_SIZE + "px " + LiteGraph.NODE_TEXT_FONT;
         this.node_title_color = LiteGraph.NODE_TITLE_COLOR;
         this.default_link_color = LiteGraph.LINK_COLOR;
         this.default_connection_color = {
