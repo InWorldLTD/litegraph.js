@@ -8052,12 +8052,13 @@ LGraphNode.prototype.executeAction = function(action)
         }
 
         var y = 50;
-        if (subnode.inputs)
         ctx.font = "14px " + LiteGraph.NODE_TEXT_FONT;
+        if (subnode.inputs) {
             for (var i = 0; i < subnode.inputs.length; ++i) {
                 var input = subnode.inputs[i];
-                if (input.not_subgraph_input)
+                if (input.not_subgraph_input) {
                     continue;
+                }
 
                 //input button clicked
                 if (this.drawButton(20, y + 2, w - 20, h - 2)) {
@@ -8077,8 +8078,9 @@ LGraphNode.prototype.executeAction = function(action)
                         this.node_dragged.pos[1] = this.graph_mouse[1] - 5;
                         this.graph.afterChange();
                     }
-                    else
+                    else {
                         console.error("graph input node not found:", type);
+                    }
                 }
                 ctx.fillStyle = "#9C9";
                 ctx.beginPath();
@@ -8091,6 +8093,7 @@ LGraphNode.prototype.executeAction = function(action)
                 ctx.fillText(input.type, 130, y + h * 0.75);
                 y += h;
             }
+        }
         //add + button
         if (this.drawButton(20, y + 2, w - 20, h - 2, "+", "#151515", "#222")) {
             this.showSubgraphPropertiesDialog(subnode);
@@ -8122,12 +8125,13 @@ LGraphNode.prototype.executeAction = function(action)
         }
 
         var y = 50;
-        if (subnode.outputs)
         ctx.font = "14px " + LiteGraph.NODE_TEXT_FONT;
+        if (subnode.outputs) {
             for (var i = 0; i < subnode.outputs.length; ++i) {
                 var output = subnode.outputs[i];
-                if (output.not_subgraph_input)
+                if (output.not_subgraph_input) {
                     continue;
+                }
 
                 //output button clicked
                 if (this.drawButton(canvas_w - w, y + 2, w - 20, h - 2)) {
@@ -8147,8 +8151,9 @@ LGraphNode.prototype.executeAction = function(action)
                         this.node_dragged.pos[1] = this.graph_mouse[1] - 5;
                         this.graph.afterChange();
                     }
-                    else
+                    else {
                         console.error("graph input node not found:", type);
+                    }
                 }
                 ctx.fillStyle = "#9C9";
                 ctx.beginPath();
@@ -8161,6 +8166,7 @@ LGraphNode.prototype.executeAction = function(action)
                 ctx.fillText(output.type, canvas_w - w + 130, y + h * 0.75);
                 y += h;
             }
+        }
         //add + button
         if (this.drawButton(canvas_w - w, y + 2, w - 20, h - 2, "+", "#151515", "#222")) {
             this.showSubgraphPropertiesDialogRight(subnode);
@@ -8176,7 +8182,7 @@ LGraphNode.prototype.executeAction = function(action)
 		var pos = this.ds.convertOffsetToCanvas(this.graph_mouse);
 		var hover = LiteGraph.isInsideRectangle( pos[0], pos[1], x,y,w,h );
 		pos = this.last_click_position ? [this.last_click_position[0], this.last_click_position[1]] : null;
-        if(pos) {
+        if (pos) {
             var rect = this.canvas.getBoundingClientRect();
             pos[0] -= rect.left;
             pos[1] -= rect.top;
@@ -8184,14 +8190,14 @@ LGraphNode.prototype.executeAction = function(action)
 		var clicked = pos && LiteGraph.isInsideRectangle( pos[0], pos[1], x,y,w,h );
 
 		ctx.fillStyle = hover ? hovercolor : bgcolor;
-		if(clicked)
+		if (clicked) {
 			ctx.fillStyle = "#AAA";
+        }
 		ctx.beginPath();
 		ctx.roundRect(x,y,w,h,[4] );
 		ctx.fill();
 
-		if(text != null)
-		{
+		if (text != null) {
 			if(text.constructor == String)
 			{
 				ctx.fillStyle = textcolor;
@@ -8203,8 +8209,9 @@ LGraphNode.prototype.executeAction = function(action)
 		}
 
 		var was_clicked = clicked && !this.block_click;
-		if(clicked)
+		if (clicked) {
 			this.blockClick();
+        }
 		return was_clicked;
 	}
 
@@ -8215,8 +8222,9 @@ LGraphNode.prototype.executeAction = function(action)
 		pos = this.last_click_position;
 		var clicked = pos && LiteGraph.isInsideRectangle( pos[0], pos[1], x,y,w,h );
 		var was_clicked = clicked && !this.block_click;
-		if(clicked && hold_click)
+		if (clicked && hold_click) {
 			this.blockClick();
+        }
 		return was_clicked;
 	}
 
@@ -8306,11 +8314,10 @@ LGraphNode.prototype.executeAction = function(action)
         }
 
         //reset in case of error
-        if ( !this.viewport )
-		{
-	        ctx.restore();
-		    ctx.setTransform(1, 0, 0, 1, 0, 0);
-		}
+        if (!this.viewport) {
+            ctx.restore();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+        }
         this.visible_links.length = 0;
 
         if (this.graph) {
@@ -8319,8 +8326,7 @@ LGraphNode.prototype.executeAction = function(action)
             this.ds.toCanvasContext(ctx);
 
             //render BG
-            if ( this.ds.scale < 1.5 && !bg_already_painted && this.clear_background_color )
-            {
+            if (this.ds.scale < 1.5 && !bg_already_painted && this.clear_background_color) {
                 ctx.fillStyle = this.clear_background_color;
                 ctx.fillRect(
                     this.visible_area[0],
