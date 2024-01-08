@@ -18,6 +18,8 @@
 
         CANVAS_GRID_SIZE: 10,
 
+        DRAGGING_RECTANGLE_COLOR: "#FFF",
+
         NODE_TITLE_HEIGHT: 30,
         NODE_TITLE_TEXT_Y: 20,
         NODE_SLOT_HEIGHT: 20,
@@ -7968,7 +7970,7 @@ LGraphNode.prototype.executeAction = function(action)
 
 			//the selection rectangle
             if (this.dragging_rectangle) {
-                ctx.strokeStyle = "#FFF";
+                ctx.strokeStyle = LiteGraph.DRAGGING_RECTANGLE_COLOR;
                 ctx.strokeRect(
                     this.dragging_rectangle[0],
                     this.dragging_rectangle[1],
