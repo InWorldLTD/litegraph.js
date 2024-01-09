@@ -34,6 +34,7 @@
         NODE_TEXT_COLOR: "#AAA",
         NODE_SUBTEXT_SIZE: 12,
         NODE_SUBTEXT_WEIGHT: "normal",
+        NODE_SUBTEXT_OFFSET: 4,
         NODE_DEFAULT_COLOR: "#333",
         NODE_DEFAULT_BGCOLOR: "#353535",
         NODE_DEFAULT_BOXCOLOR: "#666",
@@ -8775,7 +8776,7 @@ LGraphNode.prototype.executeAction = function(action)
                             if (horizontal || slot.dir == LiteGraph.UP) {
                                 ctx.fillText(text, pos[0], pos[1] - 10);
                             } else {
-                                ctx.fillText(text, pos[0] + 10, pos[1] + 5);
+                                ctx.fillText(text, pos[0] + 10, pos[1] + LiteGraph.NODE_SUBTEXT_OFFSET);
                             }
                         }
                     }
@@ -8882,7 +8883,7 @@ LGraphNode.prototype.executeAction = function(action)
                             if (horizontal || slot.dir == LiteGraph.DOWN) {
                                 ctx.fillText(text, pos[0], pos[1] - 8);
                             } else {
-                                ctx.fillText(text, pos[0] - 10, pos[1] + 5);
+                                ctx.fillText(text, pos[0] - 10, pos[1] + LiteGraph.NODE_SUBTEXT_OFFSET);
                             }
                         }
                     }
