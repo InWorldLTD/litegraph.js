@@ -2669,7 +2669,7 @@
     /* Creates a clone of this node */
     LGraphNode.prototype.clone = function() {
         var node = LiteGraph.createNode(this.type);
-        if (!node || node.cloneable !== false) {
+        if (!node) {
             return null;
         }
 
