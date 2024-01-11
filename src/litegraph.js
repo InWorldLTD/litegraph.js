@@ -8835,7 +8835,8 @@ LGraphNode.prototype.executeAction = function(action)
                                 10,
                                 14
                             );
-                        } else {
+                        }
+                        else {
                             ctx.rect(
                                 pos[0] - 6 + 0.5,
                                 pos[1] - 5 + 0.5,
@@ -8860,10 +8861,12 @@ LGraphNode.prototype.executeAction = function(action)
                         ctx.rect(pos[0] + 2, pos[1] + 2, 2, 2);
                         doStroke = false;
                     } else {
-                        if (low_quality)
+                        if (low_quality) {
                             ctx.rect(pos[0] - 4, pos[1] - 4, 8, 8 );
-                        else
+                        }
+                        else {
                             ctx.arc(pos[0], pos[1], 4, 0, Math.PI * 2);
+                        }
                     }
 
                     //trigger
@@ -8872,8 +8875,9 @@ LGraphNode.prototype.executeAction = function(action)
 
                     //if (slot.links != null && slot.links.length)
                     ctx.fill();
-                    if (!low_quality && doStroke)
+                    if (!low_quality && doStroke) {
                         ctx.stroke();
+                    }
 
                     //render output name
                     if (render_text) {
@@ -8898,8 +8902,9 @@ LGraphNode.prototype.executeAction = function(action)
                 if (horizontal || node.widgets_up) {
                     widgets_y = 2;
                 }
-                if ( node.widgets_start_y != null )
+                if ( node.widgets_start_y != null ) {
                     widgets_y = node.widgets_start_y;
+                }
                 this.drawNodeWidgets(
                     node,
                     widgets_y,
@@ -9004,29 +9009,38 @@ LGraphNode.prototype.executeAction = function(action)
         ctx.arc( pos[0], pos[1], 3, 0, Math.PI * 2 );
         ctx.fill();
 
-        if (link.data == null)
+        if (link.data == null) {
             return;
+        }
 
-        if (this.onDrawLinkTooltip)
-            if ( this.onDrawLinkTooltip(ctx,link,this) == true )
+        if (this.onDrawLinkTooltip) {
+            if ( this.onDrawLinkTooltip(ctx,link,this) == true ) {
                 return;
+            }
+        }
 
         var data = link.data;
         var text = null;
 
-        if ( data.constructor === Number )
+        if ( data.constructor === Number ) {
             text = data.toFixed(2);
-        else if ( data.constructor === String )
+        }
+        else if ( data.constructor === String ) {
             text = "\"" + data + "\"";
-        else if ( data.constructor === Boolean )
+        }
+        else if ( data.constructor === Boolean ) {
             text = String(data);
-        else if (data.toToolTip)
+        }
+        else if (data.toToolTip) {
             text = data.toToolTip();
-        else
+        }
+        else {
             text = "[" + data.constructor.name + "]";
+        }
 
-        if (text == null)
+        if (text == null) {
             return;
+        }
         text = text.substr(0,30); //avoid weird
 
         ctx.font = "14px Courier New";
