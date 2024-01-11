@@ -4364,7 +4364,7 @@
         // allow target node to change slot
         if (target_node.onBeforeConnectInput) {
             // This way node can choose another slot (or make a new one?)
-            target_slot = target_node.onBeforeConnectInput(target_slot); //callback
+            target_slot = target_node.onBeforeConnectInput(target_slot, output.type, output, this, slot); //callback
         }
 
         //check target_slot and check connection types
