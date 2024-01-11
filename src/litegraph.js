@@ -2667,7 +2667,7 @@
     /* Creates a clone of this node */
     LGraphNode.prototype.clone = function() {
         var node = LiteGraph.createNode(this.type);
-        if (!node) {
+        if (!node || node.cloneable !== false) {
             return null;
         }
 
@@ -7245,16 +7245,18 @@ LGraphNode.prototype.executeAction = function(action)
         var selected_nodes_array = [];
         for (var i in this.selected_nodes) {
             var node = this.selected_nodes[i];
-            if (node.clonable === false) {
-                continue;
+            if (node.cloneable !== false) {            
+                node._relative_id = index;
+                selected_nodes_array.push(node);
+                index += 1;
             }
-            node._relative_id = index;
-            selected_nodes_array.push(node);
-            index += 1;
         }
 
         for (var i = 0; i < selected_nodes_array.length; ++i) {
             var node = selected_nodes_array[i];
+            if (node.cloneable === false) {
+                continue;
+            }
             var cloned = node.clone();
             if (!cloned) {
                 console.warn("node type not found: " + node.type );
@@ -13167,16 +13169,15 @@ LGraphNode.prototype.executeAction = function(action)
         var newSelected = {};
         
         var fApplyMultiNode = function(node){
-            if (node.clonable === false) {
-                return;
+            if (node.cloneable !== false) {
+                var newnode = node.clone();
+                if (!newnode) {
+                    return;
+                }
+                newnode.pos = [node.pos[0] + 5, node.pos[1] + 5];
+                node.graph.add(newnode);
+                newSelected[newnode.id] = newnode;
             }
-            var newnode = node.clone();
-            if (!newnode) {
-                return;
-            }
-            newnode.pos = [node.pos[0] + 5, node.pos[1] + 5];
-            node.graph.add(newnode);
-            newSelected[newnode.id] = newnode;
         }
 
         var graphcanvas = LGraphCanvas.active_canvas;
@@ -13342,7 +13343,7 @@ LGraphNode.prototype.executeAction = function(action)
             }
         }
 
-        if (node.clonable !== false) {
+        if (node.cloneable !== false) {
             options.push({
                 content: "Clone",
                 callback: LGraphCanvas.onMenuNodeClone
