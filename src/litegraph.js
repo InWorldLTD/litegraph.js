@@ -2430,6 +2430,7 @@
         + onConnectInput : if returns false the incoming connection will be canceled
         + onConnectionsChange : a connection changed (new one or removed) (LiteGraph.INPUT or LiteGraph.OUTPUT, slot, true if connected, link_info, input_info )
         + onAction: action slot triggered
+        + onClone : node is cloned
         + getExtraMenuOptions: to add option to context menu
 */
 
@@ -6001,6 +6002,9 @@ LGraphNode.prototype.executeAction = function(action)
                     cloned.pos[0] += 5;
                     cloned.pos[1] += 5;
                     this.graph.add(cloned,false,{doCalcSize: false});
+                    if (node.onClone) {
+                        node.onClone(node, cloned);
+                    }
                     node = cloned;
                     skip_action = true;
                     if (!block_drag_node) {
