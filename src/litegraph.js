@@ -13181,6 +13181,9 @@ LGraphNode.prototype.executeAction = function(action)
                 newnode.pos = [node.pos[0] + 5, node.pos[1] + 5];
                 node.graph.add(newnode);
                 newSelected[newnode.id] = newnode;
+                if (node.onClone) {
+                    node.onClone(node, newnode);
+                }
             }
         }
 
